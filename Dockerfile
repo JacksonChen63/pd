@@ -32,7 +32,7 @@ RUN CGO_CFLAGS="-D_LARGEFILE64_SOURCE" make
 #FROM alpine:3.17
 FROM pingcap/pd:v8.4.0
 
-COPY --from=builder /go/src/github.com/tikv/pd/bin/pd-server /pd-server
+#COPY --from=builder /go/src/github.com/tikv/pd/bin/pd-server /pd-server
 COPY --from=builder /go/src/github.com/tikv/pd/bin/pd-ctl /pd-ctl
 COPY --from=builder /go/src/github.com/tikv/pd/bin/pd-recover /pd-recover
 COPY --from=builder /jq /usr/local/bin/jq
