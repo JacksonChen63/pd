@@ -36,10 +36,13 @@ FROM pingcap/pd:v8.4.0
 COPY --from=builder /go/src/github.com/tikv/pd/bin/pd-ctl /pd-ctl
 COPY --from=builder /go/src/github.com/tikv/pd/bin/pd-recover /pd-recover
 COPY --from=builder /jq /usr/local/bin/jq
+RUN dnf install -y pam-1.5.1-22.el9_5 openssl-1:3.2.2-6.el9_5.1 && dnf update -y pam openssl
+
 
 #RUN apk add --no-cache \
 #    curl
-
+#USER 1000
+#RUN chmod 700 /bin/su
 EXPOSE 2379 2380
 
 ENTRYPOINT ["/pd-server"]
